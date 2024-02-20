@@ -13,7 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import CustomTextField from '../../../components/forms/theme-elements/CustomTextField';
 
 const AuthLogin = ({ title, subtitle, subtext }) => {
-    const [email, setEmail] = useState(''); // 변경된 부분
+    const [agencyId, setAgencyId] = useState(''); // 변경된 부분
     const [password, setPassword] = useState('');
     const [rememberDevice, setRememberDevice] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,22 +21,22 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('https://port-0-spring-eu1k2llldpju8v.sel3.cloudtype.app/auth/login', {
+            const response = await fetch('http://localhost:8080/agency/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ agencyId, password }),
                 mode: 'cors'
             });
 
             if (response.ok) {
                 response.json().then(data => {
-                    const token = data.accessToken;
+                    const token = data.token;
                     console.log(token);
 
                     localStorage.setItem('token', token);
-                    localStorage.setItem('email', email);
+                    localStorage.setItem('agencyId', agencyId);
                     localStorage.setItem('password', password);
                     navigate('/starter');
                     setIsLoggedIn(true);
@@ -71,8 +71,8 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
                         id="email"
                         variant="outlined"
                         fullWidth
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} // 변경된 부분
+                        value={agencyId}
+                        onChange={(e) => setAgencyId(e.target.value)} // 변경된 부분
                     />
                 </Box>
                 <Box mt="25px">

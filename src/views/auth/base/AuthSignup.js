@@ -6,18 +6,31 @@ import CustomTextField from '../../../components/forms/theme-elements/CustomText
 import { Stack } from '@mui/system';
 
 const AuthRegister = ({ title, subtitle, subtext }) => {
-    const [selectedRole, setSelectedRole] = useState('');
-    const [selectedGender, setSelectedGender] = useState('');
-
-    const handleRoleChange = (event) => {
-        setSelectedRole(event.target.value);
-    };
-    const handleGenderChange = (event) => {
-        setSelectedGender(event.target.value);
-    };
+    const [agencyId, setAgencyId] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordsMatch, setPasswordsMatch] = useState(true);
+    const [agencyName, setAgencyName] = useState('');
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const handleAgencyIdChange = (event) =>{
+        setAgencyId(event.target.value);
+    };
+
+    const handleAgencyNameChange = (event) =>{
+        setAgencyName(event.target.value);
+    };
+
+    const handleNameChange = (event) =>{
+        setName(event.target.value);
+    };
+
+    const handlePhoneChange = (event) =>{
+        setPhone(event.target.value);
+    };
+
+
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
@@ -29,13 +42,32 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
         setPasswordsMatch(password === event.target.value);
     };
 
-    const handleSubmit = () => {
-        if (passwordsMatch) {
-            // 비밀번호와 비밀번호 재확인이 일치하므로 회원 가입 처리 가능
-            console.log('회원 가입 정보 전송');
-        } else {
-            // 비밀번호가 일치하지 않을 때의 처리
-            console.log('비밀번호가 일치하지 않습니다.');
+
+
+
+    const handleSignUp = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/agency/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ agencyId, password , agencyName, name, phone}),
+                mode: 'cors'
+            });
+
+            if (response.ok) {
+                response.json().then(data => {
+                    console.log('회원가입 성공');
+                }).catch(error => {
+                    console.error('JSON 파싱 오류:', error);
+            });
+            } else {
+                console.error('로그인 실패');
+            }
+
+        } catch (error) {
+            console.error('오류 발생:', error);
         }
     };
 
@@ -53,7 +85,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                 <Stack mb={5}>
                     <Typography variant="subtitle1"
                                 fontWeight={600} component="label" htmlFor='id' mb="5px">아이디</Typography>
-                    <CustomTextField id="id" variant="outlined" fullWidth />
+                    <CustomTextField id="id" variant="outlined" fullWidth value={agencyId} onChange={handleAgencyIdChange}/>
 
                     <Typography variant="subtitle1"
                                 fontWeight={600} component="label" htmlFor='password' mb="5px" mt="25px">비밀번호</Typography>
@@ -85,83 +117,21 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
 
                     <Typography variant="subtitle1"
                                 fontWeight={600} component="label" htmlFor='division' mb="5px" mt="25px">소속</Typography>
-                    <CustomTextField id="division" variant="outlined" fullWidth />
+                    <CustomTextField id="division" variant="outlined" fullWidth value={agencyName} onChange={handleAgencyNameChange}/>
 
                     <Typography variant="subtitle1"
                                 fontWeight={600} component="label" htmlFor='name' mb="5px" mt="25px">이름</Typography>
-                    <CustomTextField id="name" variant="outlined" fullWidth />
-
-                    <Typography variant="subtitle1"
-                                fontWeight={600} component="label" htmlFor='birthday' mb="5px" mt="25px">생년월일</Typography>
-                    <CustomTextField id="birthday" variant="outlined" fullWidth />
-
-                    <Typography variant="subtitle1"
-                                fontWeight={600} component="label" htmlFor='gender' mb="5px" mt="25px">성별</Typography>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="male"
-                                checked={selectedGender === 'male'}
-                                onChange={handleGenderChange}
-                            />
-                            남성
-                        </label>
-                        <span style={{ margin: '0 56px' }}></span>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="female"
-                                checked={selectedGender === 'female'}
-                                onChange={handleGenderChange}
-                            />
-                            여성
-                        </label>
-                    </div>
-
-                    <Typography variant="subtitle1"
-                                fontWeight={600} component="label" htmlFor='email' mb="5px" mt="25px">이메일</Typography>
-                    <CustomTextField id="email" variant="outlined" fullWidth />
-
-
-                    <Typography variant="subtitle1"
-                                fontWeight={600} component="label" htmlFor='role' mb="5px" mt="25px">직무</Typography>
-                    <div style={{ display: 'flex', gap: '10px' }}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="admin"
-                                checked={selectedRole === 'admin'}
-                                onChange={handleRoleChange}
-                            />
-                            관리자
-                        </label>
-                        <span style={{ margin: '0 50px' }}></span>
-                        <label>
-                            <input
-                                type="checkbox"
-                                value="worker"
-                                checked={selectedRole === 'worker'}
-                                onChange={handleRoleChange}
-                            />
-                            근로자
-                        </label>
-                    </div>
+                    <CustomTextField id="name" variant="outlined" fullWidth value={name} onChange={handleNameChange} />
 
                     <Typography variant="subtitle1"
                                 fontWeight={600} component="label" htmlFor='phone_number' mb="5px" mt="25px">휴대전화</Typography>
-                    <CustomTextField id="phone_number" variant="outlined" fullWidth />
+                    <CustomTextField id="phone_number" variant="outlined" fullWidth value={phone} onChange={handlePhoneChange}/>
 
-                    <Typography variant="subtitle1"
-                                fontWeight={600} component="label" htmlFor='address' mb="5px" mt="25px">주소</Typography>
-                    <CustomTextField id="address" variant="outlined" fullWidth />
 
-                    <Typography variant="subtitle1"
-                                fontWeight={600} component="label" htmlFor='note' mb="5px" mt="25px">특이사항</Typography>
-                    <CustomTextField id="note" variant="outlined" fullWidth />
+
 
                 </Stack>
-                <Button color="primary" variant="contained" size="large" fullWidth component={Link} to="/auth/login"  disabled={!passwordsMatch} onClick={handleSubmit}>
+                <Button color="primary" variant="contained" size="large" fullWidth component={Link} to="/login"  disabled={!passwordsMatch} onClick={handleSignUp}>
                     Sign Up
                 </Button>
             </Box>

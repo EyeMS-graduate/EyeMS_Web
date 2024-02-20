@@ -194,7 +194,7 @@ const ProjectTables = (props) => {
                                         </div>
                                     </div>
                                     <div className="user-info-container">
-                                        {/* UserInfo 컴포넌트에 selectedUser 상태 전달 */}
+                                        {/* AddUser 컴포넌트에 selectedUser 상태 전달 */}
                                         {open[index] && <UserInfo selectedUser={selectedUser} />}
                                     </div>
                                     <div className="user chart">

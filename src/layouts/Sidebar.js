@@ -24,16 +24,16 @@ const navigation = [
     href: "/cards",
     icon: "bi bi-card-text",
   },
-/*  {
-    title: "작업 허가",
-    href: "/pdflist",
+  {
+    title: "마이페이지",
+    href: "/myPage",
     icon: "bi bi-patch-check",
   },
   {
-    title: "로그인",
-    href: "/login",
+    title: "유저 관리",
+    href: "/UserInfo",
     icon: "bi bi-textarea-resize",
-  },*/
+  },
 ];
 /*
  {

@@ -19,6 +19,7 @@ import AddUser from "./views/UserInfo/UserInfo"
 import Login from "./views/auth/Login";
 import Signup from "./views/auth/Signup";
 import UserInfo from "./views/UserInfo/UserInfo";
+import DownloadContent from "./views/download/DownloadContent"
 
 
 const App = () => {
@@ -29,7 +30,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
 
         <Route path="/" element={<FullLayout />}>
-          <Route index element={<Navigate to="/starter" />} />
+          <Route index element={<Navigate to="/login" />} />
           <Route path="/starter" element={<Starter />} />
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/badges" element={<Badges />} />
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/breadcrumbs" element={<Breadcrumbs />} />
             <Route path="/myPage" element={<MyPage />} />
             <Route path="/userInfo" element={<UserInfo />} />
+            <Route path="/downloadContent" element={<DownloadContent/>} />
 
 
         </Route>

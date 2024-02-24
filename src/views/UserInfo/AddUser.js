@@ -8,11 +8,20 @@ import DatePicker from 'react-datepicker';
 
 
 
-const AddUser = ({title, subtext, subtitle}) => {
+const AddUser = () => {
 
     const [phone1, setPhone1] = useState('');
     const [phone2, setPhone2] = useState('');
     const [phone3, setPhone3] = useState('');
+    const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [birth, setBirth] = useState(null);
+    const [address, setAddress] = useState('');
+    const [glasses, setGlasses] = useState('');
+    const [gender, setGender] = useState('');
+    const [username, setUsername] = useState('');
+    const [domain, setDomain] = useState('');
 
     const handlePhone1Change = (event) => {
         const { value } = event.target;
@@ -35,15 +44,6 @@ const AddUser = ({title, subtext, subtitle}) => {
         }
     };
 
-
-
-    const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [birth, setBirth] = useState(null);
-    const [address, setAddress] = useState('');
-    const [glasses, setGlasses] = useState('');
-    const [gender, setGender] = useState('');
 
     const handleGlassesChange = (event) =>{
         setGlasses(event.target.value);
@@ -68,8 +68,6 @@ const AddUser = ({title, subtext, subtitle}) => {
     };
 
 
-    const [username, setUsername] = useState('');
-    const [domain, setDomain] = useState('');
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     };
@@ -113,19 +111,13 @@ const AddUser = ({title, subtext, subtitle}) => {
         } catch (error) {
             console.error('오류 발생:', error);
         }
+        window.location.reload();
     };
 
     return (
         <Card>
             <CardBody>
         <>
-            {title ? (
-                <Typography fontWeight="700" variant="h2" mb={1}>
-                    {title}
-                </Typography>
-            ) : null}
-
-            {subtext}
 
             <Box>
                 <Stack mb={5}>
@@ -268,11 +260,10 @@ const AddUser = ({title, subtext, subtitle}) => {
                     <CustomTextField id="address" variant="outlined" fullWidth value={address} onChange={handleAddressChange}/>
 
                 </Stack>
-                <Button color="primary" variant="contained" size="large" fullWidth component={Link} to="/starter"  onClick={handleSignUp}>
+                <Button color="primary" variant="contained" size="large" fullWidth component={Link} to="/UserInfo"  onClick={handleSignUp}>
                     Sign Up
                 </Button>
             </Box>
-            {subtitle}
         </>
             </CardBody>
         </Card>

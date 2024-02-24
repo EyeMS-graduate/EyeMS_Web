@@ -34,13 +34,15 @@ const navigation = [
     href: "/UserInfo",
     icon: "bi bi-textarea-resize",
   },
-];
-/*
- {
-    title: "Breadcrumbs",
-    href: "/breadcrumbs",
+  {
+    title: "다운로드",
+    href: "/downloadContent",
     icon: "bi bi-link",
   },
+];
+
+
+/*
   {
     title: "Buttons",
     href: "/buttons",

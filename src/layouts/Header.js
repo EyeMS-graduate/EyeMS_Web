@@ -6,7 +6,6 @@ import {
   Nav,
   NavItem,
   NavbarBrand,
-  UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -22,10 +21,16 @@ const Header = () => {
 
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
+
+
+
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
+  const handleLogout = () => {
+    localStorage.clear()
+  }
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
@@ -85,10 +90,17 @@ const Header = () => {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>My Account</DropdownItem>
-            <DropdownItem>Edit Profile</DropdownItem>
+            <Link to="/agencyInfo">
+            <DropdownItem
+            >
+              My Info
+            </DropdownItem>
+            </Link>
+            <DropdownItem >Edit Profile</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>Logout</DropdownItem>
+            <Link to="/Login">
+            <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
+            </Link>
           </DropdownMenu>
         </Dropdown>
       </Collapse>

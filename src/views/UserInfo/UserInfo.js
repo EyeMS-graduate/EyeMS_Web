@@ -12,7 +12,7 @@ const UserInfo = () => {
         userId : "",
         password : "",
         name : "",
-        birth : "",
+        birth : "2000-01-01",
         phone : "",
         email : "",
         address : "",

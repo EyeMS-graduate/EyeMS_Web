@@ -32,7 +32,7 @@ const UserModify = ({userInfo}) => {
         const [username, domain] = userInfo["email"].split('@');
         setUsername(username)
         setDomain(domain)
-        //setBirth(moment(userInfo["birth"], "yyyy-MM-dd").toDate())
+        setBirth(moment(userInfo["birth"], "yyyy-MM-dd").toDate())
         setGlasses(userInfo["glasses"])
         const [p1, p2, p3] = userInfo["phone"].split('-');
         setPhone1(p1)
@@ -277,7 +277,7 @@ const UserModify = ({userInfo}) => {
                             <CustomTextField id="address" variant="outlined" fullWidth value={address} onChange={handleAddressChange}/>
 
                         </Stack>
-                        <Button color="primary" variant="contained" size="large" fullWidth component={Link} to="/UserInfo"  onClick={handleUpdateUser}>
+                        <Button  color="primary" variant="contained" size="large" fullWidth component={Link} to="/UserInfo"  onClick={handleUpdateUser}>
                             Update
                         </Button>
                     </Box>
